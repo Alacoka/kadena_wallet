@@ -24,15 +24,15 @@ const WalletDemo = () => {
 
   const handleConnect = async (walletType: string) => {
     setIsConnecting(true);
-    
+
     // Simulate connection process
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
-      
+
       // Mock wallet connection
       const mockAddress = 'k:5a2afbc4564b76b2c27ce5a644cab643c43663835ea0be22433b209d3351f937';
       const mockBalance = '142.56';
-      
+
       setWalletState({
         isConnected: true,
         address: mockAddress,
@@ -62,7 +62,7 @@ const WalletDemo = () => {
       balance: '0.00',
       walletType: ''
     });
-    
+
     toast({
       title: "Wallet Disconnected",
       description: "Your wallet has been safely disconnected",
@@ -72,15 +72,15 @@ const WalletDemo = () => {
   const handleSendTransaction = async (to: string, amount: string, memo: string) => {
     try {
       console.log('Sending transaction:', { to, amount, memo });
-      
+
       // Simulate transaction
       await new Promise(resolve => setTimeout(resolve, 1500));
-      
+
       // Update balance (mock)
       const currentBalance = parseFloat(walletState.balance);
       const sendAmount = parseFloat(amount);
       const newBalance = (currentBalance - sendAmount).toFixed(2);
-      
+
       setWalletState(prev => ({
         ...prev,
         balance: newBalance
@@ -102,11 +102,11 @@ const WalletDemo = () => {
   const handleSignMessage = async (message: string) => {
     try {
       console.log('Signing message:', message);
-      
+
       // Simulate message signing
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const mockSignature = "0x" + Array.from({ length: 64 }, () => 
+
+      const mockSignature = "0x" + Array.from({ length: 64 }, () =>
         Math.floor(Math.random() * 16).toString(16)
       ).join('');
 
@@ -125,15 +125,15 @@ const WalletDemo = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-cyan-50">
-      <WalletHeader 
-        isConnected={walletState.isConnected} 
+      <WalletHeader
+        isConnected={walletState.isConnected}
         address={walletState.address}
       />
-      
+
       <main className="container mx-auto px-4 py-8">
         {!walletState.isConnected ? (
           <div className="animate-fade-in">
-            <WalletConnection 
+            <WalletConnection
               onConnect={handleConnect}
               isConnecting={isConnecting}
             />
@@ -150,11 +150,11 @@ const WalletDemo = () => {
           </div>
         )}
       </main>
-      
+
       <footer className="border-t border-border mt-16 py-8">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-muted-foreground">
-            Kadena Wallet Demo - Built for the Kadena Community
+
           </p>
           <p className="text-xs text-muted-foreground mt-2">
             This is a demonstration wallet for development purposes only
